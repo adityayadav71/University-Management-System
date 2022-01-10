@@ -89,20 +89,12 @@ public class Teacher{
             case 1 -> {
                 System.out.print("Enter Teachers' ID: ");
                 int ID = in.nextInt();
-                Teacher selected = new Teacher();
-                for (Teacher value : Teacher.teacher) {
-                    if(value.id == ID) {
-                        selected = value;
-                    }else{System.out.println("No such ID exists...");}
-                }
                     for (Teacher value : teacher) {
-                        if (value.getId() == ID) {
                             System.out.print("Current Salary: " + value.Salary);
                             System.out.print("\nIncrement percentage: ");
                             float percent = in.nextFloat();
                             value.Salary += value.Salary * 0.01 * percent;
                             System.out.print("Increased Salary: " + value.Salary + "\n");
-                        }
                     }
             }
             case 2 -> {
