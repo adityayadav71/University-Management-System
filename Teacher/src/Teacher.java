@@ -10,7 +10,7 @@ public class Teacher{
     String Qualification;
     String Department;
     private String coursesTaught = "";
-    ArrayList<Teacher> teacher = new ArrayList<>(2);
+    static ArrayList<Teacher> teacher = new ArrayList<>(2);
     public Teacher(){
         Scanner in = new Scanner(System.in);
         System.out.print("Enter Name: ");
@@ -21,13 +21,10 @@ public class Teacher{
         this.age = in.nextInt();
         System.out.print("Enter Qualification: ");
         this.Qualification = in.next();
-        System.out.println("Enter number of years experienced: ");
+        System.out.print("Enter number of years experienced: ");
         this.workexperience = in.nextInt();
         System.out.print("Enter Department: ");
         this.Department = in.next();
-    }
-    public Teacher(int i ){
-        //intialize null teacher object
     }
     public Teacher(String Name, int Salary, int age, String Qualification,int workexperience, String Department, String courses) {
         this.setId();
@@ -61,12 +58,8 @@ public class Teacher{
     public int getId(){
         return this.id;
     }
-    public void addnewteachers(){
+    public static void addnewteachers(){
         Scanner in = new Scanner(System.in);
-        Teacher teacher1 = new Teacher("Mr. Rahul Chaube",50000,25,"MS",1,"Computers","CSE-101, CSE-314");
-        Teacher teacher2 = new Teacher("Mr. Manish Singh",90000,45,"PhD",13,"Civil","CVL-101, CVL-042");
-        teacher.add(teacher1);
-        teacher.add(teacher2);
         System.out.print("Enter Number of new teachers to add: ");
         int newTeachers = in.nextInt();
         System.out.println("---------------------------------------------");
@@ -80,13 +73,13 @@ public class Teacher{
             System.out.println("Added teacher " + teacher.get(i).Name + " succesfully");
         }
     }
-    public void viewTeachers(){
+    public static void viewTeachers(){
         for (Teacher value : teacher) {
             System.out.println("ID:             " + value.getId() + "\n" + "Name:           " + value.Name + "\n" +"Courses taught: " + value.getcoursestaught() + "\n" +"Department:     " + value.Department + "\n" +"Qualification:  " + value.Qualification);
             System.out.println("---------------------------------------------");
         }
     }
-    public void increaseSalary() {
+    public static void increaseSalary() {
         Scanner in = new Scanner(System.in);
         System.out.println("1 - By ID");
         System.out.println("2 - By Experience");
@@ -96,15 +89,21 @@ public class Teacher{
             case 1 -> {
                 System.out.print("Enter Teachers' ID: ");
                 int ID = in.nextInt();
-                for (Teacher value : teacher) {
-                    if (value.getId() == ID) {
-                        System.out.print("Current Salary: " + value.Salary);
-                        System.out.print("\nIncrement percentage: ");
-                        float percent = in.nextFloat();
-                        value.Salary += value.Salary * 0.01 * percent;
-                        System.out.print("Increased Salary: " + value.Salary + "\n");
-                    }
+                Teacher selected = new Teacher();
+                for (Teacher value : Teacher.teacher) {
+                    if(value.id == ID) {
+                        selected = value;
+                    }else{System.out.println("No such ID exists...");}
                 }
+                    for (Teacher value : teacher) {
+                        if (value.getId() == ID) {
+                            System.out.print("Current Salary: " + value.Salary);
+                            System.out.print("\nIncrement percentage: ");
+                            float percent = in.nextFloat();
+                            value.Salary += value.Salary * 0.01 * percent;
+                            System.out.print("Increased Salary: " + value.Salary + "\n");
+                        }
+                    }
             }
             case 2 -> {
                 System.out.print("Enter criteria(workexperience): ");
